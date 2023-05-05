@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BaseMapper">
+
+    <!--    实例子类需要添加以下的实例方法-->
+
+    <!--主表名称-->
+    <!--    <sql id="MainDatabase">-->
+    <!--        tbl_creditcard_recomm_info-->
+    <!--    </sql>-->
+
+
+    <!--    &lt;!&ndash;主键名称&ndash;&gt;-->
+    <!--    <sql id="PrimaryKey">-->
+    <!--        ID-->
+    <!--    </sql>-->
+
+
+    <!--    &lt;!&ndash;所有的键的名称&ndash;&gt;-->
+    <!--    &lt;!&ndash;使用时注意逗号&ndash;&gt;-->
+    <!--    <sql id="attributeNameTests">-->
+    <!--        <if test="id != null and id != ''">ID,</if>-->
+    <!--    </sql>-->
+
+
+    <!--&lt;!&ndash;    所有的取值过程&ndash;&gt;-->
+    <!--    <sql id="attributeValueTests">-->
+    <!--        <if test="id != null and id != ''">#{id},</if>-->
+    <!--    </sql>-->
+
+    <!--    &lt;!&ndash;    所有更新操作测动作&ndash;&gt;-->
+    <!--    <sql id="notNullKeyTest">-->
+    <!--        <if test="managerNo != null and managerNo != ''">MANAGER_NO = #{managerNo},</if>-->
+    <!--    </sql>-->
+
+<!--    <sql id="Base_Column_List">-->
+<!--        ID-->
+<!--        ,CUST_MANAGER_NO,CUST_MANAGER_NAME,CUST_MANAGER_PHONE,RECOMM_NAME,RECOMM_PHONE-->
+<!--    </sql>-->
+    <!-- 新增一条推荐信息 -->
+    <insert id="insert">
+        insert into
+        <include refid="MainDatabase"></include>(
+        <include refid="attributeNameTests"></include>,
+        created_time
+        )
+        values(
+        <include refid="attributeValueTests"></include>,
+        CURRENT_TIMESTAMP
+        )
+    </insert>
+
+    <!-- 删除一条推荐信息 -->
+    <delete id="deleteById" parameterType="string">
+        delete
+        from
+        <include refid="MainDatabase"></include>
+        where
+        <include refid="PrimaryKey"></include>
+        = #{id}
+    </delete>
+
+
+    <update id="update">
+        update
+        <include refid="MainDatabase"></include>
+        <set>
+            <include refid="notNullKeyTest"></include>
+        </set>
+        where <include refid="PrimaryKey"></include> = #{id}
+    </update>
+
+    <select id="select" parameterType="map">
+        select
+        <include refid="attributeNameTests"></include>
+        from
+        <include refid="MainDatabase"></include>
+        where
+        <include refid="notNullKeyTest"></include>
+    </select>
+
+
+
+</mapper>

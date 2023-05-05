@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jiuyuetian.sevendaycouple.mappers.mybatiss1.UserMapper">
+
+    <resultMap id="resultMap" type="com.allinfinance.creditcard.apply.entity.CityConfig">
+        <result column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="CITY_ID" jdbcType="VARCHAR" property="cityId"/>
+        <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <sql id="MainDatabase">
+        tbl_creditcard_cityconfig
+    </sql>
+
+    <sql id="PrimaryKey">
+        ID
+    </sql>
+    <!--使用时注意逗号-->
+
+    <sql id="attributeNameTests">
+
+        <if test="cityId != null">CITY_ID</if>
+        <if test="parentId != null">PARENT_ID</if>
+        <if test="name != null and name != ''">NAME,</if>
+        <if test="type != null">TYPE,</if>
+        ID
+    </sql>
+    <!--使用时注意逗号-->
+    <sql id="Base_Column_List">
+        ID
+        ,
+        CITY_ID,
+        PARENT_ID,
+        NAME,
+        TYPE
+    </sql>
+
+    <sql id="attributeValueTests">
+        <if test="cityId != null">#{cityId},</if>
+        <if test="parentId != null">#{parentId},</if>
+        <if test="name != null and name != ''">#{name},</if>
+        <if test="type != null">#{type},</if>
+        <if test="id != null and id != ''">#{id}</if>
+    </sql>
+    <sql id="selectWhere">
+        <if test="CITY_ID != null">ID = #{cityId} and</if>
+        <if test="PARENT_ID != null">ID = #{parentId} and</if>
+        <if test="NAME != null and name != ''">ID = #{name} and</if>
+        <if test="TYPE != null">ID = #{type} and</if>
+    </sql>
+
+    <!-- 新增一条推荐信息 -->
+    <insert id="insert">
+        insert into
+        <include refid="MainDatabase"></include>(
+        <include refid="attributeNameTests"></include>,
+        create_time
+        )
+        values(
+        <include refid="attributeValueTests"></include>,
+        CURRENT_TIMESTAMP
+        )
+    </insert>
+
+    <!-- 删除一条推荐信息 -->
+    <delete id="deleteById" parameterType="string">
+        delete
+        from
+        <include refid="MainDatabase"></include>
+        where
+        <include refid="PrimaryKey"></include>
+        = #{id}
+    </delete>
+
+
+    <update id="update">
+        update
+        <include refid="MainDatabase"></include>
+        <set>
+            <include refid="selectWhere"></include>
+        </set>
+        where <include refid="PrimaryKey"></include> = #{id}
+    </update>
+
+
+    <select id="selectById" parameterType="String" resultMap="resultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="MainDatabase"></include>
+        where <include refid="PrimaryKey"></include> = #{id, javaType=string, jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectOne" parameterType="map" resultMap="resultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="MainDatabase"></include>
+        where
+        <include refid="selectWhere"/>
+
+        <include refid="PrimaryKey"></include>
+        = #{id, javaType=string, jdbcType=VARCHAR}
+    </select>
+
+</mapper>

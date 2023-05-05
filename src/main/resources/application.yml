@@ -10,3 +10,16 @@ server:
     uri-encoding: utf-8
     max-threads: 500
     basedir: /home/zty/tmp
+
+spring:
+  datasource:
+    one:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://175.24.175.180:3306/chapter05-1?useUnicode=true&amp;useSSL=false
+      username: test
+      password: 123
+    two:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://175.24.175.180:3306/chapter05-2?useUnicode=true&amp;useSSL=false
+      username: test
+      password: 123

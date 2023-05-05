@@ -9,6 +9,6 @@ import lombok.*;
 @Data
 @ToString
 public class LoginRequestDto {
-    private String name;
+    private String userName;
     private String password;
 }
