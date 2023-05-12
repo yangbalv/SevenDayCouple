@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(value = "com.springboot.live_comm.mappers.mybatiss1", sqlSessionFactoryRef = "sqlSessionFactoryBean1")
+@MapperScan(value = "com.jiuyuetian.sevendaycouple.mappers.mybatiss1", sqlSessionFactoryRef = "sqlSessionFactoryBean1")
 public class MyBatisConfigOne {
     @Autowired
     @Qualifier("dsOne")

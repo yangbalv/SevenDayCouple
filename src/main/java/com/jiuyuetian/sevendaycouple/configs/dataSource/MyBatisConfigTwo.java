@@ -14,7 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 @Configuration
-@MapperScan(value = "com.springboot.live_comm.mappers.mybatiss2", sqlSessionFactoryRef = "sqlSessionFactoryBean2")
+@MapperScan(value = "com.jiuyuetian.sevendaycouple.mappers.mybatiss2", sqlSessionFactoryRef = "sqlSessionFactoryBean2")
 public class MyBatisConfigTwo {
     @Autowired
     @Qualifier("dsTwo")
@@ -31,22 +31,4 @@ public class MyBatisConfigTwo {
     SqlSessionTemplate sqlSessionTemplate2() throws Exception {
         return new SqlSessionTemplate(sqlSessionFactoryBean2());
     }
-    public static void main(String[] args) throws UnsupportedEncodingException {
-
-
-//        许昊:
-//        http://wxtest.allinfinance.com/evercos/assets/nonfinance/index.html#/limit/adjust
-//
-//        许昊:
-//        http://wxtest.allinfinance.com/evercos/assets/nonfinance/index.html#/limit/Fixed
-//
-//        许昊:
-//        http://wxtest.allinfinance.com/evercos/assets/nonfinance/index.html#/balance/query
-
-//        System.out.println(URLEncoder.encode("https://weixin.allinfinance.com/evercos/credit/temp/index#/limit/Fixed", "UTF-8"));
-//        System.out.println(URLEncoder.encode("https://weixin.allinfinance.com/evercos/assets/nonfinance/index.html#/limit/adjust", "UTF-8"));
-//        System.out.println(URLEncoder.encode("https://weixin.allinfinance.com/evercos/assets/nonfinance/index.html#/limit/Fixed", "UTF-8"));
-        System.out.println(URLEncoder.encode("https://www.baidu.com/", "UTF-8"));
-
-   }
 }
