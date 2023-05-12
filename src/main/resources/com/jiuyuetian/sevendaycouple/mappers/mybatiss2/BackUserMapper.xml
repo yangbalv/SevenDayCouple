@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.jiuyuetian.sevendaycouple.mappers.mybatiss1.UserMapper">
+<mapper namespace="com.jiuyuetian.sevendaycouple.mappers.mybatiss2.BackUserMapper">
 
     <resultMap id="resultMap" type="com.jiuyuetian.sevendaycouple.model.UserModel">
         <result column="ID" jdbcType="VARCHAR" property="id"/>
