@@ -11,4 +11,5 @@ import lombok.*;
 public class UserModel extends BaseModelAdapter<String> {
     private String userName;
     private String password;
+    private String userDetail;
 }
