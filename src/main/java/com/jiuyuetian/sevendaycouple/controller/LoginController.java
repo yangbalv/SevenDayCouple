@@ -5,6 +5,8 @@ import com.jiuyuetian.sevendaycouple.dto.LoginResponseDto;
 import com.jiuyuetian.sevendaycouple.mappers.mybatiss1.UserMapper;
 import com.jiuyuetian.sevendaycouple.mappers.mybatiss2.BackUserMapper;
 import com.jiuyuetian.sevendaycouple.model.UserModel;
+import com.jiuyuetian.sevendaycouple.services.mybatiss1.IUserService;
+import com.jiuyuetian.sevendaycouple.services.mybatiss2.IBackUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +19,19 @@ public class LoginController {
     public static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
-    private UserMapper userMapper;
+    private IUserService userService;
 
 
     @Autowired
 //    注：多源数据库不能将接口名称设置成一样的，否则引用时需要使用包名称加上接口名称，会导致bean加载时出现问题
-    private BackUserMapper backUserMapper;
+    private IBackUserService backUserService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
 //    @ResponseBody(RestController相当于添加了ResponseBody)
     public LoginResponseDto login(LoginRequestDto requestDto) {
         logger.info("/login:[{}]", requestDto);
         LoginResponseDto responseDto = new LoginResponseDto();
-        UserModel userModel = userMapper.getOneByUserName(requestDto.getUserName());
+        UserModel userModel = userService.getOneByUserName(requestDto.getUserName());
         if (null == userModel) {
             responseDto.setResult(false);
             responseDto.setResultMsg("没有查询到登录信息");
@@ -49,13 +51,13 @@ public class LoginController {
     public LoginResponseDto register(LoginRequestDto requestDto) throws Exception {
         logger.info("/register:[{}]", requestDto);
         LoginResponseDto responseDto = new LoginResponseDto();
-        UserModel userModel = userMapper.getOneByUserName(requestDto.getUserName());
+        UserModel userModel = userService.getOneByUserName(requestDto.getUserName());
         if (null == userModel) {
             userModel = new UserModel();
             userModel.setUserName(requestDto.getUserName());
             userModel.setPassword(requestDto.getPassword());
-            int insert = userMapper.insert(userModel);
-            backUserMapper.insert(userModel);
+            UserModel model = userService.add(userModel);
+            UserModel backModel = backUserService.add(userModel);
             responseDto.setResult(true);
             responseDto.setResultMsg("请求成功");
         } else {
