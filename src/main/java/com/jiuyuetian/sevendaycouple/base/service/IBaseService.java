@@ -1,4 +1,4 @@
-package com.jiuyuetian.sevendaycouple.base.servise;
+package com.jiuyuetian.sevendaycouple.base.service;
 
 import com.jiuyuetian.sevendaycouple.base.model.IBaseModel;
 

@@ -1,10 +1,11 @@
 
-package com.jiuyuetian.sevendaycouple.base.servise.impl;
+package com.jiuyuetian.sevendaycouple.base.service.impl;
 
 
 import com.jiuyuetian.sevendaycouple.base.dao.IBaseDao;
 import com.jiuyuetian.sevendaycouple.base.model.IBaseModel;
-import com.jiuyuetian.sevendaycouple.base.servise.IBaseService;
+import com.jiuyuetian.sevendaycouple.base.service.IBaseService;
+import com.jiuyuetian.sevendaycouple.model.UserModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -84,6 +85,16 @@ public abstract class BaseServiceImpl<M extends IBaseModel<PK>, PK extends Seria
 
     public List<M> getAllList() {
         return this.getDao().selectAll();
+    }
+
+
+    public List<M> getList(Map<String, Object> param) {
+        return this.getDao().selectList(param);
+    }
+
+
+    public List<M> getList(M m) {
+        return this.getDao().selectList(m);
     }
 
 }
